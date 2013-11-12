@@ -1,5 +1,4 @@
 require 'minitest/autorun'
-require 'minitest/pride'
 require './beer_song'
 
 class BeerSongTest < Minitest::Test
@@ -25,6 +24,7 @@ class BeerSongTest < Minitest::Test
       "Take one down and pass it around, 2 bottles of beer on the wall.\n"
     assert_equal expected, beer_song.verse(3)
   end
+
   def test_verse_1
     expected =
       "1 bottle of beer on the wall, 1 bottle of beer.\n" +
@@ -49,11 +49,14 @@ class BeerSongTest < Minitest::Test
   def test_several_verses
     expected =
       "8 bottles of beer on the wall, 8 bottles of beer.\n" +
-      "Take one down and pass it around, 7 bottles of beer on the wall.\n\n" +
+      "Take one down and pass it around, 7 bottles of beer on the wall.\n" +
+      "\n" +
       "7 bottles of beer on the wall, 7 bottles of beer.\n" +
-      "Take one down and pass it around, 6 bottles of beer on the wall.\n\n" +
+      "Take one down and pass it around, 6 bottles of beer on the wall.\n" +
+      "\n" +
       "6 bottles of beer on the wall, 6 bottles of beer.\n" +
-      "Take one down and pass it around, 5 bottles of beer on the wall.\n\n"
+      "Take one down and pass it around, 5 bottles of beer on the wall.\n" +
+      "\n"
     assert_equal expected, beer_song.verses(8, 6)
   end
 
