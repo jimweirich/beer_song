@@ -1,15 +1,7 @@
 module Beer
 
   class Verse
-    def self.make(n)
-      if n == 0
-        Zero.new
-      elsif n == 1
-        One.new
-      else
-        new(n)
-      end
-    end
+    attr_reader :number
 
     def initialize(n)
       @number = n
@@ -21,7 +13,7 @@ module Beer
     end
 
     def next_verse
-      Verse.make(pred)
+      Verse.new(pred)
     end
 
     protected
@@ -41,23 +33,19 @@ module Beer
     end
 
     def bottles
-      @number == 1 ? "bottle" : "bottles"
+      "bottles"
     end
 
     def pronoun
-      @number == 1 ? "it" : "one"
+      "one"
     end
 
     def amount
-      @number == 0 ? "no more" : @number.to_s
+      @number.to_s
     end
 
     def action
-      if @number == 0
-        "Go to the store and buy some more"
-      else
-        "Take #{pronoun} down and pass it around"
-      end
+      "Take #{pronoun} down and pass it around"
     end
 
     class Zero < Verse
@@ -95,6 +83,16 @@ module Beer
         "it"
       end
     end
+
+    def self.new(n)
+      if n == 0
+        Zero.new
+      elsif n == 1
+        One.new
+      else
+        super(n)
+      end
+    end
   end
 
   class Song
@@ -103,7 +101,7 @@ module Beer
     end
 
     def verse(n)
-      Verse.make(n).to_s
+      Verse.new(n).to_s
     end
   end
 end
