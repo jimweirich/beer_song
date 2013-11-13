@@ -66,6 +66,14 @@ module Beer
       def initialize(_)
         super(1)
       end
+
+      def bottles
+        "bottle"
+      end
+
+      def pronoun
+        "it"
+      end
     end
   end
 
