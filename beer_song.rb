@@ -49,8 +49,14 @@ module Beer
       "one"
     end
 
-    class One < Number
-      def initialize
+    class SpecialNumber < Number
+      def self.new
+        super(:ignore)
+      end
+    end
+
+    class One < SpecialNumber
+      def initialize(_)
         super(1)
       end
 
@@ -63,8 +69,8 @@ module Beer
       end
     end
 
-    class Zero < Number
-      def initialize
+    class Zero < SpecialNumber
+      def initialize(_)
         super(0)
       end
 
