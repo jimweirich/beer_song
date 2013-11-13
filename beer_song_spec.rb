@@ -22,7 +22,8 @@ module Beer
     "No more bottles of beer on the wall, no more bottles of beer.\n" +
     "Go to the store and buy some more, 99 bottles of beer on the wall.\n"
 
-  describe Verse do
+  describe "Verse" do
+    Given { pending "Waiting for verse" }
     Given(:verse) { Verse.new(n) }
 
     Invariant { verse.next_verse.number == ((verse.number+99) % 100) }
@@ -61,6 +62,11 @@ module Beer
     end
 
     context "with an arbitrary verse" do
+      When(:result) { song.verse(99) }
+      Then { result == V99 }
+   end
+
+    context "with an another arbitrary verse" do
       When(:result) { song.verse(98) }
       Then { result == V98 }
     end
