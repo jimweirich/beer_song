@@ -2,7 +2,9 @@ module Beer
 
   class Verse
     def self.make(n)
-      if n == 1
+      if n == 0
+        Zero.new
+      elsif n == 1
         One.new
       else
         new(n)
@@ -55,6 +57,24 @@ module Beer
         "Go to the store and buy some more"
       else
         "Take #{pronoun} down and pass it around"
+      end
+    end
+
+    class Zero < Verse
+      def self.new
+        super(:ignore)
+      end
+
+      def initialize(_)
+        super(0)
+      end
+
+      def amount
+        "no more"
+      end
+
+      def action
+        "Go to the store and buy some more"
       end
     end
 
