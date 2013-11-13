@@ -54,19 +54,19 @@ module Beer
   end
 
   describe Song do
-    Given(:bottle) { Song.new }
+    Given(:song) { Song.new }
 
     def count(string, pattern)
       string.scan(Regexp.new(Regexp.quote(pattern))).size
     end
 
     context "one verse" do
-      When(:result) { bottle.verse(2) }
+      When(:result) { song.verse(2) }
       Then { result == V2 }
     end
 
     context "entire song" do
-      When(:result) { bottle.verses(99) }
+      When(:result) { song.verses(99) }
       Then { count(result, V99 + "\n") == 1 }
       Then { count(result, V98 + "\n") == 1 }
       Then { count(result, V2 + "\n") == 1 }
