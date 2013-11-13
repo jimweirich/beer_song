@@ -22,39 +22,32 @@ module Beer
     "No more bottles of beer on the wall, no more bottles of beer.\n" +
     "Go to the store and buy some more, 99 bottles of beer on the wall.\n"
 
-  describe Number do
-    Given(:bn) { Number.new(n) }
-
-    Invariant { bn.pred == Number.new((n+99) % 100) }
+  describe Verse do
+    Given(:verse) { Verse.new(n) }
 
     context "with 99" do
       Given(:n) { 99 }
-      Then { bn.to_s == '99' }
-      Then { bn.verse == V99 }
+      Then { verse.to_s == V99 }
     end
 
     context "with 98" do
       Given(:n) { 98 }
-      Then { bn.to_s == '98' }
-      Then { bn.verse == V98 }
+      Then { verse.to_s == V98 }
     end
 
     context "with 2" do
       Given(:n) { 2 }
-      Then { bn.to_s == '2' }
-      Then { bn.verse == V2 }
+      Then { verse.to_s == V2 }
     end
 
     context "with 1" do
       Given(:n) { 1 }
-      Then { bn.to_s == '1' }
-      Then { bn.verse == V1 }
+      Then { verse.to_s == V1 }
     end
 
     context "with 0" do
       Given(:n) { 0 }
-      Then { bn.to_s == 'no more' }
-      Then { bn.verse == V0 }
+      Then { verse.to_s == V0 }
     end
   end
 
