@@ -84,14 +84,13 @@ module Beer
       end
     end
 
+    PREMADE = {
+      0 => Zero.new,
+      1 => One.new,
+    }
+
     def self.new(n)
-      if n == 0
-        Zero.new
-      elsif n == 1
-        One.new
-      else
-        super(n)
-      end
+      PREMADE[n] || super(n)
     end
   end
 
