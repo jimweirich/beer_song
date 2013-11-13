@@ -1,46 +1,56 @@
 module Beer
 
   class Verse
+    def self.make(n)
+      new(n)
+    end
+
     def initialize(n)
       @number = n
     end
 
     def to_s
-      "#{on_the_wall(@number).capitalize}, #{of_beer(@number)}.\n" +
-        "#{action(@number)}, #{on_the_wall(pred(@number))}.\n"
+      "#{on_the_wall.capitalize}, #{of_beer}.\n" +
+        "#{action}, #{next_verse.on_the_wall}.\n"
+    end
+
+    def next_verse
+      Verse.make(pred)
+    end
+
+    protected
+
+    def on_the_wall
+      "#{of_beer} on the wall"
     end
 
     private
 
-    def pred(n)
-      (n+99) % 100
+    def pred
+      (@number+99) % 100
     end
 
-    def on_the_wall(n)
-      "#{of_beer(n)} on the wall"
+    def of_beer
+      "#{amount} #{bottles} of beer"
     end
 
-    def of_beer(n)
-      "#{amount(n)} #{bottles(n)} of beer"
+    def bottles
+      @number == 1 ? "bottle" : "bottles"
     end
 
-    def bottles(n)
-      n == 1 ? "bottle" : "bottles"
+    def pronoun
+      @number == 1 ? "it" : "one"
     end
 
-    def pronoun(n)
-      n == 1 ? "it" : "one"
+    def amount
+      @number == 0 ? "no more" : @number.to_s
     end
 
-    def amount(n)
-      n == 0 ? "no more" : n.to_s
-    end
-
-    def action(n)
-      if n == 0
+    def action
+      if @number == 0
         "Go to the store and buy some more"
       else
-        "Take #{pronoun(n)} down and pass it around"
+        "Take #{pronoun} down and pass it around"
       end
     end
   end
@@ -51,7 +61,7 @@ module Beer
     end
 
     def verse(n)
-      Verse.new(n).to_s
+      Verse.make(n).to_s
     end
   end
 end
