@@ -25,6 +25,8 @@ module Beer
   describe Verse do
     Given(:verse) { Verse.new(n) }
 
+    Invariant { verse.next_verse.number == ((verse.number+99) % 100) }
+
     context "with 99" do
       Given(:n) { 99 }
       Then { verse.to_s == V99 }

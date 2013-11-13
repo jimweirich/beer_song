@@ -1,6 +1,8 @@
 module Beer
 
   class Verse
+    attr_reader :number
+
     def initialize(number)
       @number = number
     end
@@ -8,6 +10,10 @@ module Beer
     def to_s
       "#{on_the_wall.capitalize}, #{of_beer}.\n" +
         "#{action}, #{next_verse.on_the_wall}.\n"
+    end
+
+    def next_verse
+      Verse.new(pred)
     end
 
     protected
@@ -22,16 +28,12 @@ module Beer
       "#{amount} #{bottles} of beer"
     end
 
-    def next_verse
-      Verse.new(pred)
-    end
-
     def action
       "Take #{pronoun} down and pass it around"
     end
 
     def pred
-      @number - 1
+      number - 1
     end
 
     def bottles
@@ -43,7 +45,7 @@ module Beer
     end
 
     def amount
-      @number.to_s
+      number.to_s
     end
 
     class Special < Verse
