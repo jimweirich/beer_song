@@ -60,9 +60,24 @@ module Beer
       string.scan(Regexp.new(Regexp.quote(pattern))).size
     end
 
-    context "one verse" do
+    context "with an arbitrary verse" do
+      When(:result) { song.verse(98) }
+      Then { result == V98 }
+    end
+
+    context "with the ante-penultimate verse" do
       When(:result) { song.verse(2) }
       Then { result == V2 }
+    end
+
+    context "with the penultimate verse" do
+      When(:result) { song.verse(1) }
+      Then { result == V1 }
+    end
+
+    context "with the last verse" do
+      When(:result) { song.verse(0) }
+      Then { result == V0 }
     end
 
     context "entire song" do
