@@ -1,12 +1,13 @@
 module Beer
-  class Song
-    def verses(start, finish=0)
-      start.downto(finish).map { |n| verse(n) + "\n" }.join
+
+  class Verse
+    def initialize(n)
+      @number = n
     end
 
-    def verse(n)
-      "#{on_the_wall(n).capitalize}, #{of_beer(n)}.\n" +
-        "#{action(n)}, #{on_the_wall(pred(n))}.\n"
+    def to_s
+      "#{on_the_wall(@number).capitalize}, #{of_beer(@number)}.\n" +
+        "#{action(@number)}, #{on_the_wall(pred(@number))}.\n"
     end
 
     private
@@ -42,6 +43,15 @@ module Beer
         "Take #{pronoun(n)} down and pass it around"
       end
     end
+  end
 
+  class Song
+    def verses(start, finish=0)
+      start.downto(finish).map { |n| verse(n) + "\n" }.join
+    end
+
+    def verse(n)
+      Verse.new(n).to_s
+    end
   end
 end
