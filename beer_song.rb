@@ -59,13 +59,13 @@ module Beer
       "Take #{pronoun} down and pass it around"
     end
 
-    class WithArglessNew < Verse
+    class HardwiredVerse < Verse
       def self.new
         super(:ignore)
       end
     end
 
-    class Zero < WithArglessNew
+    class Zero < HardwiredVerse
       def initialize(_)
         super(0)
       end
@@ -85,7 +85,7 @@ module Beer
       cached
     end
 
-    class One < WithArglessNew
+    class One < HardwiredVerse
       def initialize(_)
         super(1)
       end
