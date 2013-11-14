@@ -3,6 +3,17 @@ module Beer
   class Verse
     attr_reader :number
 
+    CACHE = { }
+
+    def self.new(n)
+      CACHE[n] || super(n)
+    end
+
+    def self.cached
+      obj = new
+      CACHE[obj.number] = obj
+    end
+
     def initialize(n)
       @number = n
     end
@@ -25,7 +36,7 @@ module Beer
     private
 
     def pred
-      (@number+99) % 100
+      number - 1
     end
 
     def of_beer
@@ -59,6 +70,10 @@ module Beer
         super(0)
       end
 
+      def pred
+        99
+      end
+
       def amount
         "no more"
       end
@@ -66,6 +81,8 @@ module Beer
       def action
         "Go to the store and buy some more"
       end
+
+      cached
     end
 
     class One < WithArglessNew
@@ -80,15 +97,8 @@ module Beer
       def pronoun
         "it"
       end
-    end
 
-    PREMADE = {
-      0 => Zero.new,
-      1 => One.new,
-    }
-
-    def self.new(n)
-      PREMADE[n] || super(n)
+      cached
     end
   end
 
